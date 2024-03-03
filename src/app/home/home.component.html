@@ -1,0 +1,48 @@
+<div>
+    <nav class="navbar bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand  text-light fw-bolder">
+            <i class="fa-solid fa-bowl-food"></i>
+         Recipes
+          </a>
+        </div>
+      </nav>
+</div>
+<div class="row ">
+
+  <div class="d-flex align-items-center justify-content-center m-2">
+    <span>Search: </span>
+    <input [(ngModel)]="searchKey" type="text" class="form-control ms-2 w-25 me-4" placeholder="Search By Cuisine/name">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+     Categories
+      </button>
+      <ul class="dropdown-menu">
+        <li ><button   class="dropdown-item">Lunch</button></li>
+        <li ><button  class="dropdown-item" >Dinner</button></li>
+        <li ><button  class="dropdown-item" >Snack</button></li>
+
+      </ul>
+    </div>
+</div>
+
+    <div *ngFor="let recipes of recipeDetails|search:searchKey|paginate:{itemsPerPage:8,currentPage:page} let i=index;" class="col-lg-3 mt-2"   >
+        <div class="card mt-5 ms-4" style="width: 18rem;">
+            <img [src]="recipes.image" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title text-center">{{recipes.name}}</h5>
+              <h5 class="card-title text-center">{{recipes.cuisine}}</h5>
+              <h5 class="card-title text-center">{{recipes.mealType}}</h5>
+
+
+              <!-- <a href="#" class="btn btn-primary"></a> -->
+            </div>
+
+          </div>
+    </div>
+<div class="text-center mt-4">
+        <pagination-controls (pageChange)="page=$event" ></pagination-controls>
+    
+</div>
+</div>
+
